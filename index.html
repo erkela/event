@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+      #event {
+        width: 50vw;
+        height: 50vh;
+        background-color: rebeccapurple;
+      }
+      #clear {
+        height: 10vh;
+        width: 50vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="event"></div>
+    <div id="result"></div>
+    <button id="clear">clear</button>
+    <script>
+      const event = document.getElementById("event");
+      const result = document.getElementById("result");
+      const clear = document.getElementById("clear");
+      const tableau = [
+        "mousedown",
+        "mouseup",
+        "touchstart",
+        "touchend",
+        "pointerdown",
+        "pointerup",
+        "pointercancel",
+        "click",
+        "dbclick",
+      ];
+      let prev = 0;
+      let now = 0;
+      clear.addEventListener("click", () => {
+        result.innerHTML = "";
+        prev = 0;
+        now = 0;
+      });
+
+      tableau.forEach((e) => {
+        event.addEventListener(e, () => {
+          let time = 0;
+          if (!prev) {
+            prev = performance.now();
+          } else {
+            after = performance.now();
+            time = after - prev;
+          }
+
+          const p = document.createElement("p");
+
+          p.textContent = `Event ${e} was trigger.
+                It took ${time} ms ! `;
+          result.appendChild(p);
+        });
+      });
+      event.addEventListener();
+    </script>
+  </body>
+</html>
